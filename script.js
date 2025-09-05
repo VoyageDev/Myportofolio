@@ -1,5 +1,7 @@
 function handlePasswordForm() {
   const form = document.getElementById("password-form");
+  const password = "Pass123";
+
   if (!form) return;
 
   const statusMessageDiv = document.getElementById("status-message");
@@ -9,8 +11,6 @@ function handlePasswordForm() {
     const formData = new FormData(form);
     const inputPassword = formData.get("password");
 
-    // Hapus logika pengecekan password dari sini
-    // Ganti dengan memanggil API kita
     try {
       const response = await fetch("/api/check-password", {
         method: "POST",
@@ -110,11 +110,9 @@ function showNotification(message, type = "success") {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-  // Inisialisasi semua penangan formulir
   handlePasswordForm();
   handleContactForm();
 
-  // Dapatkan elemen-elemen yang dibutuhkan
   const html = document.documentElement;
   const videoEl = document.getElementById("bg-video");
   const videoSourceEl = videoEl ? videoEl.querySelector("source") : null;
