@@ -1,4 +1,5 @@
-// congrats u find the easy way !!
+// congrats u find the easy way !! 
+// now try the hard way 🔥
 
 export default function handler(request, response) {
   if (request.method !== "POST") {
