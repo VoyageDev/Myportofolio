@@ -23,7 +23,6 @@ function handlePasswordForm() {
       const result = await response.json();
 
       if (response.ok) {
-        // Jika status HTTP 200-299
         statusMessageDiv.textContent = result.message;
         statusMessageDiv.classList.remove("hidden", "bg-red-500");
         statusMessageDiv.classList.add("bg-green-500");
@@ -32,7 +31,6 @@ function handlePasswordForm() {
         }, 4000);
         form.reset();
       } else {
-        // Jika status HTTP 401 atau lainnya
         statusMessageDiv.textContent = result.message;
         statusMessageDiv.classList.remove("hidden", "bg-green-500");
         statusMessageDiv.classList.add("bg-red-500");
@@ -50,43 +48,35 @@ function handlePasswordForm() {
   });
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-  handlePasswordForm();
-  handleContactForm();
-});
-
 // Fungsi untuk menangani formulir kontak
 function handleContactForm() {
-  const emailForm = document.getElementById("email-form");
-  if (emailForm) {
-    emailForm.addEventListener("submit", function (e) {
-      e.preventDefault();
-      const formData = new FormData(emailForm);
-      const name = formData.get("name");
-      const fromEmail = formData.get("email");
-      const message = formData.get("message");
+  emailjs.init({
+    publicKey: "7-BmsJP59fStHAtke",
+  });
 
-      // Validasi sederhana
-      if (!name || !fromEmail || !message) {
-        showNotification("Please fill all fields correctly.", "error");
-        return;
+  // Dapatkan form kontak
+  const contactForm = document.getElementById("contact-form");
+
+  // Jika form tidak ditemukan, hentikan eksekusi
+  if (!contactForm) return;
+
+  contactForm.addEventListener("submit", function (event) {
+    event.preventDefault();
+
+    const serviceID = "service_l71argn";
+    const templateID = "template_8k61fih";
+
+    emailjs.sendForm(serviceID, templateID, this).then(
+      () => {
+        showNotification("Message sent successfully!", "success");
+        contactForm.reset();
+      },
+      (err) => {
+        showNotification("Failed to send message. Please try again.", "error");
+        console.error("EmailJS Error:", err);
       }
-
-      // --- ALTERNATIF AMAN UNTUK email.php ---
-      // Membuat link `mailto` untuk membuka aplikasi email default pengguna
-      const subject = `Pesan dari Formulir Kontak - ${name}`;
-      const body = `Nama Pengirim: ${name}\nEmail Pengirim: ${fromEmail}\n\nPesan:\n${message}`;
-      const mailtoLink = `mailto:voyage4ev@gmail.com?subject=${encodeURIComponent(
-        subject
-      )}&body=${encodeURIComponent(body)}`;
-
-      // Buka link di tab baru
-      window.open(mailtoLink, "_blank");
-
-      showNotification("Your email client has been opened!", "success");
-      this.reset();
-    });
-  }
+    );
+  });
 }
 
 // Fungsi untuk menampilkan notifikasi pop-up
@@ -154,11 +144,262 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
+  // Fungsi untuk mengganti warna teks
+  function syncThemeStyles() {
+    const html = document.documentElement;
+    const isDark = html.classList.contains("dark");
+    const text = document.getElementById("voyage");
+    const available = document.getElementById("available");
+    const toggle = document.getElementById("themeToggle");
+    const hello = document.getElementById("hello");
+    const keys = document.getElementById("keys");
+    const desc = document.getElementById("desc");
+    const contactHref = document.getElementById("contactHref");
+    const feature = document.getElementById("feature");
+    const h2 = document.getElementById("h2");
+    const p = document.getElementById("p");
+    const laravel = document.getElementById("laravel");
+    const php = document.getElementById("php");
+    const js = document.getElementById("js");
+    const tailwind = document.getElementById("tailwind");
+    const projectTitle = document.getElementById("h3");
+    const latestProject = document.getElementById("h2-1");
+    const p2 = document.getElementById("p2");
+    const p3 = document.getElementById("p3");
+    const p4 = document.getElementById("p4");
+    const reactSpan = document.getElementById("react-span");
+    const tailwindSpan = document.getElementById("tailwind-span");
+    const vueSpan = document.getElementById("vue-span");
+    const laravelSpan = document.getElementById("laravel-span");
+    const experience = document.getElementById("experience");
+    const position = document.getElementById("position");
+    const workStatus = document.getElementById("work-status");
+    const timeWorked = document.getElementById("time-worked");
+    const listWork = document.querySelectorAll("#list-work li");
+    const contact = document.getElementById("contact");
+    const p5 = document.getElementById("p5");
+    const p6 = document.getElementById("p6");
+
+    // 3. logika inti toggle
+    setTimeout(() => {
+      if (text) {
+        if (isDark) {
+          text.classList.remove("text-amber-400");
+          text.classList.add("dark:text-blue-400");
+
+          hello.classList.remove("text-neutral-950");
+
+          available.classList.add(
+            "text-blue-700",
+            "dark:text-blue-300",
+            "dark:bg-blue-500/40"
+          );
+          available.classList.remove("dark:bg-blue-600/50", "text-white");
+
+          keys.classList.remove("rainbow-outline");
+
+          desc.classList.add("text-slate-600", "dark:text-slate-300");
+          desc.classList.remove("text-neutral-800");
+
+          contactHref.classList.remove(
+            "dark:bg-slate-700",
+            "text-white",
+            "hover:bg-slate-300",
+            "hover:text-slate-800"
+          );
+          contactHref.classList.add(
+            "dark:border-slate-700",
+            "border",
+            "dark:hover:bg-slate-800"
+          );
+
+          feature.classList.remove("dark:text-slate-800");
+          feature.classList.add("text-slate-500", "dark:text-slate-400");
+
+          h2.classList.remove("dark:text-zinc-800");
+
+          p.classList.remove("dark:text-zinc-600");
+          p2.classList.remove("dark:text-zinc-600");
+          p3.classList.remove("dark:text-zinc-600");
+          p4.classList.remove("dark:text-stone-800");
+
+          php.classList.remove(
+            "border-purple-300",
+            "dark:border-purple-700",
+            "bg-purple-400",
+            "text-purple-200"
+          );
+          php.classList.add("border-slate-300", "dark:border-slate-700");
+
+          laravel.classList.remove(
+            "border-red-300",
+            "dark:border-red-700",
+            "bg-red-800",
+            "text-red-100"
+          );
+          laravel.classList.add("border-slate-300", "dark:border-slate-700");
+
+          js.classList.remove(
+            "border-yellow-300",
+            "dark:border-yellow-700",
+            "bg-yellow-400",
+            "text-yellow-50"
+          );
+          js.classList.add("border-slate-300", "dark:border-slate-700");
+
+          tailwind.classList.remove(
+            "border-sky-300",
+            "dark:border-sky-700",
+            "bg-sky-400",
+            "text-sky-200"
+          );
+          tailwind.classList.add("border-slate-300", "dark:border-slate-700");
+
+          projectTitle.classList.remove("text-amber-100/90");
+
+          latestProject.classList.remove("dark:text-zinc-800");
+
+          reactSpan.classList.remove("text-sky-400");
+          tailwindSpan.classList.remove("text-sky-200");
+          vueSpan.classList.remove("text-emerald-500");
+          laravelSpan.classList.remove("text-red-400");
+
+          experience.classList.remove("dark:text-zinc-800");
+
+          position.classList.remove("text-black");
+
+          workStatus.classList.remove("dark:text-slate-600");
+
+          timeWorked.classList.remove("text-black");
+
+          listWork.forEach((item) => {
+            item.classList.remove("dark:text-slate-900");
+          });
+
+          contact.classList.remove("dark:text-zinc-700");
+
+          p5.classList.remove("dark:text-zinc-600");
+          p6.classList.remove("text-slate-300");
+        } // white add
+        else {
+          text.classList.add("text-amber-400");
+          text.classList.remove("dark:text-blue-400");
+
+          hello.classList.add("text-neutral-950");
+
+          available.classList.add("text-white", "dark:bg-blue-600/50");
+          available.classList.remove(
+            "text-blue-700",
+            "dark:bg-blue-500/40",
+            "dark:text-blue-300"
+          );
+
+          keys.classList.add("rainbow-outline");
+
+          desc.classList.add("text-neutral-800");
+          desc.classList.remove("text-slate-600", "dark:text-slate-300");
+
+          contactHref.classList.add(
+            "dark:bg-slate-700",
+            "text-white",
+            "hover:bg-slate-300",
+            "hover:text-slate-800"
+          );
+          contactHref.classList.remove(
+            "dark:hover:bg-slate-800",
+            "border",
+            "dark:border-slate-700"
+          );
+
+          feature.classList.add("dark:text-slate-800");
+          feature.classList.remove("text-slate-500", "dark:text-slate-400");
+
+          h2.classList.add("dark:text-zinc-800");
+
+          p.classList.add("dark:text-zinc-600");
+          p2.classList.add("dark:text-zinc-600");
+          p3.classList.add("dark:text-zinc-600");
+          p4.classList.add("dark:text-stone-800");
+
+          php.classList.add(
+            "border-purple-300",
+            "dark:border-purple-700",
+            "bg-purple-400",
+            "text-purple-200"
+          );
+          php.classList.remove("border-slate-300", "dark:border-slate-700");
+
+          laravel.classList.add(
+            "border-red-300",
+            "dark:border-red-700",
+            "bg-red-800",
+            "text-red-100"
+          );
+          laravel.classList.remove("border-slate-300", "dark:border-slate-700");
+
+          js.classList.add(
+            "border-yellow-300",
+            "dark:border-yellow-700",
+            "bg-yellow-400",
+            "text-yellow-50"
+          );
+          js.classList.remove("border-slate-300", "dark:border-slate-700");
+
+          tailwind.classList.add(
+            "border-sky-300",
+            "dark:border-sky-700",
+            "bg-sky-400",
+            "text-sky-200"
+          );
+          tailwind.classList.remove(
+            "border-slate-300",
+            "dark:border-slate-700"
+          );
+
+          projectTitle.classList.add("text-amber-100/90");
+
+          latestProject.classList.add("dark:text-zinc-800");
+
+          reactSpan.classList.add("text-sky-400");
+          tailwindSpan.classList.add("text-sky-200");
+          vueSpan.classList.add("text-emerald-500");
+          laravelSpan.classList.add("text-red-400");
+
+          experience.classList.add("dark:text-zinc-800");
+
+          position.classList.add("text-black");
+
+          workStatus.classList.add("dark:text-slate-600");
+
+          timeWorked.classList.add("text-black");
+
+          listWork.forEach((item) => {
+            item.classList.add("dark:text-slate-900");
+          });
+
+          contact.classList.add("dark:text-zinc-700");
+
+          p5.classList.add("dark:text-zinc-600");
+          p6.classList.add("text-slate-300");
+        }
+      }
+    }, 300);
+  }
+
   // Fungsi untuk mengganti tema
   function toggleTheme() {
-    const isDark = html.classList.toggle("dark");
+    const html = document.documentElement;
+
+    // 1. Toggle class 'dark'
+    html.classList.toggle("dark");
+    const isDark = html.classList.contains("dark");
+
+    // 2. Simpan preferensi
     localStorage.setItem("theme", isDark ? "dark" : "light");
+
+    // 3. Panggil fungsi untuk update video dan style
     updateBackgroundVideo();
+    syncThemeStyles();
   }
 
   // Tahun otomatis
@@ -181,4 +422,5 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Inisialisasi video background saat halaman pertama kali dimuat
   updateBackgroundVideo();
+  syncThemeStyles();
 });
