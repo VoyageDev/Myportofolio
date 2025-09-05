@@ -8,6 +8,7 @@ export default function handler(request, response) {
   // Nama variabelnya akan kita set 'SECRET_PASSWORD' di dashboard Vercel
   const correctPassword = process.env.SECRET_PASSWORD;
   const dummyPassword = "Pass123";
+  const dummyPasswords = "woahyouregood";
 
   // Ambil kata sandi yang dikirim dari frontend
   const { password: userInput } = request.body;
@@ -25,6 +26,12 @@ export default function handler(request, response) {
     response.status(401).json({
       success: false,
       message: "What u expect? 😂",
+    });
+  } else if (userInput === dummyPasswords) {
+    // Kirim respons error dummy
+    response.status(401).json({
+      success: false,
+      message: "like i said steganograph 😂",
     });
   } else {
     // Kirim respons error default

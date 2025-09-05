@@ -55,6 +55,14 @@
       .link-underline:hover::after {
         transform: scaleX(1);
       }
+      .preloader-hidden {
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.5s ease-out, visibility 0.5s ease-out;
+      }
+      .hidden-by-js {
+        display: none !important;
+      }
     </style>
   </head>
 
@@ -62,6 +70,17 @@
     class="relative min-h-screen text-slate-800 dark:bg-slate-950 dark:text-slate-100 antialiased transition-colors duration-300"
     id="body"
   >
+    <div
+      id="preloader"
+      class="fixed inset-0 z-[9999] flex items-center justify-center bg-white dark:bg-slate-950"
+    >
+      <div class="newtons-cradle">
+        <div class="newtons-cradle__dot"></div>
+        <div class="newtons-cradle__dot"></div>
+        <div class="newtons-cradle__dot"></div>
+        <div class="newtons-cradle__dot"></div>
+      </div>
+    </div>
     <video
       id="bg-video"
       autoplay
@@ -209,9 +228,10 @@
             class="aspect-square rounded-3xl from-blue-200 to-blue-500/60 dark:from-blue-900/50 dark:to-blue-600/40 p-1"
             id="keys"
           >
+            <!-- maybe decode? -->
             <img
-              alt="Click me"
-              src="image/keys.png"
+              alt="THATS IT pass: woahyouregood"
+              src="image/key.jpg"
               class="h-full w-full object-cover rounded-2xl"
             />
           </div>
@@ -222,10 +242,9 @@
     <section class="mx-auto max-w-6xl px-4 py-16">
       <div class="grid md:grid-cols-3 gap-8 items-start">
         <div class="md:col-span-1">
-          <div>  
+          <div>
             <h2 class="text-2xl font-bold" id="h2">About Me</h2>
-            <p class="mt-2 text-slate-600 dark:text-slate-300"
-            id="p">
+            <p class="mt-2 text-slate-600 dark:text-slate-300" id="p">
               Im Officially a student right now and im just making this
               portofolio for my self training, hope you all enjoy this and get
               inspired. also i have a surprise for those who find the little
@@ -237,7 +256,7 @@
               id="try"
               data-modal-target="authentication-modal"
               data-modal-toggle="authentication-modal"
-              class="block text-white bg-slate-700/15 rainbow-hover font-medium rounded-lg text-sm px-5 py-2.5 mt-2 text-center" 
+              class="block text-white bg-slate-700/15 rainbow-hover font-medium rounded-lg text-sm px-5 py-2.5 mt-2 text-center"
               type="button"
             >
               Try?
@@ -350,8 +369,9 @@
       </div>
       <div class="mt-8 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
         <article
-          class="group rounded-2xl border border-slate-200 dark:border-slate-800 overflow-hidden hover:shadow-lg transition" id="project"
-        > 
+          class="group rounded-2xl border border-slate-200 dark:border-slate-800 overflow-hidden hover:shadow-lg transition"
+          id="project"
+        >
           <a href="https://katuju.id" target="_blank" class="block">
             <img
               src="image/katuju.png"
@@ -362,12 +382,16 @@
               <h3 class="font-semibold group-hover:text-blue-600" id="h3">
                 News Website
               </h3>
-              <p class="mt-1 text-sm text-slate-600 dark:text-slate-400" id="p4">
+              <p
+                class="mt-1 text-sm text-slate-600 dark:text-slate-400"
+                id="p4"
+              >
                 Collaborate with senior developer in PT HK Group.
               </p>
               <div class="mt-3 flex items-center gap-3 text-xs text-slate-500">
-                <span id="react-span">React</span><span>•</span><span id="tailwind-span">Tailwind</span
-                ><span>•</span><span id="vue-span">Vue</span><span>•</span
+                <span id="react-span">React</span><span>•</span
+                ><span id="tailwind-span">Tailwind</span><span>•</span
+                ><span id="vue-span">Vue</span><span>•</span
                 ><span id="laravel-span">Laravel</span>
               </div>
             </div>
@@ -385,11 +409,15 @@
           <span
             class="absolute left-0 top-1.5 h-3 w-3 rounded-full bg-blue-500 -translate-x-1/2"
           ></span>
-          <h3 class="font-semibold" id="position">Fullstack Developer – PT HK Group</h3>
+          <h3 class="font-semibold" id="position">
+            Fullstack Developer – PT HK Group
+          </h3>
           <p class="text-sm dark:text-slate-400" id="work-status">Internship</p>
           <p class="text-sm text-slate-500" id="time-worked">2025 — 2026</p>
           <ul
-            class="mt-2 list-disc list-inside text-slate-700 dark:text-slate-300 text-sm space-y-1" id="list-work">
+            class="mt-2 list-disc list-inside text-slate-700 dark:text-slate-300 text-sm space-y-1"
+            id="list-work"
+          >
             <li>
               Creating a hundreds of sosmed bots account and monitoring them.
             </li>
@@ -487,6 +515,11 @@
       type="text/javascript"
       src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"
     ></script>
+    <script>
+      if (sessionStorage.getItem("preloaderShown")) {
+        document.getElementById("preloader").classList.add("hidden-by-js");
+      }
+    </script>
 
     <script src="script.js"></script>
   </body>

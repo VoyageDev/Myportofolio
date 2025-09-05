@@ -109,6 +109,20 @@ function showNotification(message, type = "success") {
   }, 3000);
 }
 
+window.addEventListener("load", function () {
+  const preloader = document.getElementById("preloader");
+
+  if (preloader && !sessionStorage.getItem("preloaderShown")) {
+    preloader.classList.add("preloader-hidden");
+
+    sessionStorage.setItem("preloaderShown", "true");
+
+    setTimeout(() => {
+      preloader.style.display = "none";
+    }, 500);
+  }
+});
+
 document.addEventListener("DOMContentLoaded", () => {
   handlePasswordForm();
   handleContactForm();
