@@ -280,7 +280,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const contact = document.getElementById("contact");
     const p5 = document.getElementById("p5");
     const p6 = document.getElementById("p6");
-    const project = document.getElementById("proejct");
+    const project = document.getElementById("project");
     
 
     // 3. logika inti toggle
