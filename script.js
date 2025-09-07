@@ -162,7 +162,7 @@ function handleLanguagePrompt() {
     clearTimeout(autoDismissTimer);
     // Set cookie yang akan dibaca oleh Google Translate
     document.cookie =
-      "googtrans=/auto/id; path=/; domain=" + window.location.hostname;
+      "googtrans=/auto/id; path=/;";
     // Sembunyikan prompt
     dismissPrompt();
 
@@ -179,9 +179,42 @@ function handleLanguagePrompt() {
   });
 }
 
+// script.js
+
+// Fungsi baru untuk menangani tombol ganti bahasa
+function handleLanguageSwitcher() {
+  // Fungsi bantuan untuk membaca nilai cookie
+  const getCookie = (name) => {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) return parts.pop().split(';').shift();
+  };
+
+  const switcherButtons = document.querySelectorAll('.language-switcher');
+
+  switcherButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      const currentLangCookie = getCookie('googtrans');
+
+      // Jika saat ini di Bahasa Indonesia, kembalikan ke Bahasa Inggris
+      if (currentLangCookie && currentLangCookie.includes('/id')) {
+        document.cookie = "googtrans=/auto/en; path=/;";
+      } 
+      // Jika tidak, ubah ke Bahasa Indonesia
+      else {
+        document.cookie = "googtrans=/auto/id; path=/;";
+      }
+
+      // Muat ulang halaman untuk menerapkan perubahan
+      location.reload();
+    });
+  });
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   handlePasswordForm();
   handleContactForm();
+  handleLanguageSwitcher();
 
   const html = document.documentElement;
   const videoEl = document.getElementById("bg-video");
