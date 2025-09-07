@@ -32,7 +32,7 @@ export default function handler(request, response) {
     //  respons error dummy
     response.status(401).json({
       success: false,
-      message: "like i said steganograph 😂",
+      message: "steganograph 😂",
     });
   } else {
     //  respons error default
