@@ -280,6 +280,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const contact = document.getElementById("contact");
     const p5 = document.getElementById("p5");
     const p6 = document.getElementById("p6");
+    const project = document.getElementById("proejct");
+    
 
     // 3. logika inti toggle
     setTimeout(() => {
@@ -356,7 +358,7 @@ document.addEventListener("DOMContentLoaded", () => {
           );
           tailwind.classList.add("border-slate-300", "dark:border-slate-700");
 
-          projectTitle.classList.remove("text-amber-100/90");
+          projectTitle.classList.remove("text-amber-300/90");
 
           latestProject.classList.remove("dark:text-zinc-800");
 
@@ -381,6 +383,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
           p5.classList.remove("dark:text-zinc-600");
           p6.classList.remove("text-slate-300");
+
+          project.classList.remove("bg-white/20");
         } // white add
         else {
           text.classList.add("text-amber-400");
@@ -457,7 +461,7 @@ document.addEventListener("DOMContentLoaded", () => {
             "dark:border-slate-700"
           );
 
-          projectTitle.classList.add("text-amber-100/90");
+          projectTitle.classList.add("text-amber-300/90");
 
           latestProject.classList.add("dark:text-zinc-800");
 
@@ -482,6 +486,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
           p5.classList.add("dark:text-zinc-600");
           p6.classList.add("text-slate-300");
+
+          project.classList.add("bg-white/20");
         }
       }
     }, 300);
