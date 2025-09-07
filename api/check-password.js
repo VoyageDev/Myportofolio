@@ -20,7 +20,7 @@ export default function handler(request, response) {
     response.status(200).json({
       success: true,
       message: "Woah You Did It! 3 2 1..",
-      redirect: "https://www.youtube.com/watch?v=xvFZjo5PgG0",
+      redirect: "https://www.youtube.com/watch?v=xvFZjo5PgG0",//pls don't open this
     });
   } else if (userInput === dummyPassword) {
     //  respons error dummy
