@@ -83,16 +83,11 @@
 }
 
 /* Sembunyikan widget asli Google Translate */
-#google_translate_element {
+#google_translate_element, .skiptranslate {
   display: none !important;
 }
-
-/* Mengatasi bar aneh yang kadang muncul di atas */
-body {
+body{
   top: 0 !important;
-}
-.skiptranslate {
-  display: none !important;
 }
 
 /* From Uiverse.io by dovatgabriel */
