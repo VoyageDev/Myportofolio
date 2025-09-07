@@ -121,7 +121,63 @@ window.addEventListener("load", function () {
       preloader.style.display = "none";
     }, 500);
   }
+  handleLanguagePrompt();
 });
+
+function handleLanguagePrompt() {
+  const promptElement = document.getElementById("language-prompt");
+  const translateBtn = document.getElementById("translate-btn-id");
+  const closeBtn = document.getElementById("close-prompt-btn");
+
+  if (!promptElement || !translateBtn || !closeBtn) return;
+
+  let autoDismissTimer;
+
+  // mengecek pengunjung sudah pernah melihat prompt
+  if (!sessionStorage.getItem("languagePromptShown")) {
+    setTimeout(() => {
+      promptElement.classList.remove("hidden");
+      promptElement.classList.add("animate-slide-in");
+
+      autoDismissTimer = setTimeout(() => {
+        dismissPrompt();
+      }, 5000); 
+    }, 1500);
+  }
+
+  // Fungsi untuk menyembunyikan prompt dan menandainya sebagai sudah dilihat
+  const dismissPrompt = () => {
+    // animasi fade-out
+    promptElement.classList.add("animate-fade-out");
+    sessionStorage.setItem("languagePromptShown", "true");
+
+    setTimeout(() => {
+      promptElement.classList.add("hidden");
+    }, 300);
+  };
+
+  // menambahkan event listener untuk tombol terjemahkan
+  translateBtn.addEventListener("click", () => {
+    // batalkan timeout otomatis jika diinteraksi
+    clearTimeout(autoDismissTimer);
+    // Set cookie yang akan dibaca oleh Google Translate
+    document.cookie =
+      "googtrans=/auto/id; path=/; domain=" + window.location.hostname;
+    // Sembunyikan prompt
+    dismissPrompt();
+
+    // Muat ulang halaman agar terjemahan diterapkan
+    setTimeout(() => {
+      location.reload();
+    }, 350);
+  });
+
+  // menambahkan event listener untuk tombol tutup
+  closeBtn.addEventListener("click", () => {
+    clearTimeout(autoDismissTimer);
+    dismissPrompt();
+  });
+}
 
 document.addEventListener("DOMContentLoaded", () => {
   handlePasswordForm();
@@ -432,7 +488,7 @@ document.addEventListener("DOMContentLoaded", () => {
     .getElementById("themeToggleMobile")
     ?.addEventListener("click", toggleTheme);
 
-  // Inisialisasi video background saat halaman pertama kali dimuat
+  // inisialisasi function
   updateBackgroundVideo();
   syncThemeStyles();
 });
